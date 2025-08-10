@@ -11,4 +11,4 @@ To build an accurate model for a German utility company that forecasts energy co
 ### Project Deliverables
 - A clean, prepared dataset for modeling.
 - A predictive model for forecasting.
-- An interactive dashboard in Power BI.
+- An interactive dashboard in Power BI.pip install git-filter-repo
