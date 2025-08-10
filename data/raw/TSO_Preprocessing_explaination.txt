@@ -1,0 +1,27 @@
+Description: 
+The responsibility of the TSOs in Germany is not directly tied to specific federal states of the country. 
+Instead, each TSO is responsible for specific regions within Germany. Therefore, the data was resolved at a NUTS3 level 
+and aggregated accordingly to their specific TSOs. 
+
+The following described the required preprocessing for the TSO allocation factors. 
+
+- Direct matching from the TSO shape file for Germany and the powerplant list is not possible.
+  The following steps were required to match the powerplant list to TSO.
+
+1. Per_Unit_Generation[EIC Code] needs to be matched with matching_id_EIC[EIC Code] because the per unit data does not match with the powerplant list.
+2. matching_id_EIC[BNA] needs to be matched with Kraftwerkliste[MaStR-Nr] to obtain all corresponding units since there are multiple units for every BNA number.
+3. Kraftwerkliste[MaStR-Nr] needs to be matched with Kraftwerkliste[postal code] using the postal code as an accurate identifier for the powerplant's region. 
+	adjustment: Powerplants below 10MW do not have postal codes, so each of the NUTS3 regions within the state obtain equal shares of this generation.
+4. Postal codes are mapped to NUTS3 Codes [ie. postal_code=24855 NUTS3_code=DEF0C].
+5. NUTS3 Codes need to be matched with region name since the shape file of the TSO regions only provides the full names as an identifier [ie. Kreis Schleswig-Flensburg].
+6. NUTS3CODE_kreisname_conv[name] need to be matched with name GER_NUTS3_TSOs[name] because the conversion file does not directly convert to the exact name the TSO file, resulting in slight discrepancies [ie. Kreis Schleswig-Flensburg vs.Schleswig-Flensburg].
+7. Finally, the names are mapped to the corresponding TSO to assign every powerplant in the Kraftwerkliste one of the 4 TSO's.
+
+8. Additional adjustments were made to the TSO shape file mapping due to inconsistancies found. 
+Adjustments to GER_NUTS3_TSOs.shp:
+	- DE949 -> powerplant=Kernkraftwerk Lippe-Ems GmbH, energy= nuclear, TSO_old= TenneT, TSO_new= Amprion
+	Produced by left over pertype distribution: 
+	- DE148 -> energy = fossil Brown coal/Lignite TSO_old= Transnet_BW, TSO_new=Amprion
+	- DE149 -> energy = fossil Brown coal/Lignite TSO_old= Transnet_BW, TSO_new=Amprion
+
+9. Powerplants are now matched to TSOs and can be used to produced allocation factors. 
