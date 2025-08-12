@@ -18,8 +18,9 @@
 ---
 
 ## 📊 **Dashboard Preview**
-![Dashboard Demo](/assets/demo.gif)  
-*(Record a 15-sec demo with [ScreenToGif](https://www.screentogif.com/))*
+![Dashboard Demo]
+<img width="1000" height="589" alt="Screenshot 2025-08-10 222133" src="https://github.com/user-attachments/assets/1416d7ee-d909-4d6a-b6e5-438a7ac9b9cb" />
+
 
 | Feature               | Utility for German Energy Sector |
 |-----------------------|----------------------------------|
@@ -40,3 +41,4 @@
 git clone https://github.com/Nish0501/german-energy-forecasting.git
 pip install -r requirements.txt
 streamlit run app.py  # Access at http://localhost:8501
+
